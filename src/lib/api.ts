@@ -5,12 +5,13 @@ export const TMDB_IMG = 'https://image.tmdb.org/t/p';
 
 // Videasy servers for fetching encrypted sources
 export const VIDEASY_SERVERS = [
-  { id: 'cdn', name: 'CDN Server', url: 'https://api.videasy.net/cdn', movieOnly: true },
-  { id: 'myflixerzupcloud', name: 'MyFlixer', url: 'https://api.videasy.net/myflixerzupcloud', movieOnly: false },
+  { id: 'cdn', name: 'CDN Server ', url: 'https://api.videasy.net/cdn', movieOnly: false },
+//  { id: 'myflixerzupcloud', name: 'MyFlixer', url: 'https://api.videasy.net/myflixerzupcloud', movieOnly: false },
   { id: '1movies', name: '1Movies', url: 'https://api.videasy.net/1movies', movieOnly: false },
   { id: 'moviebox', name: 'MovieBox', url: 'https://api.videasy.net/moviebox', movieOnly: false },
   { id: 'hdmovie', name: 'HDMovie', url: 'https://api.videasy.net/hdmovie', movieOnly: false },
   { id: 'primesrcme', name: 'PrimeSrc', url: 'https://api.videasy.net/primesrcme', movieOnly: false },
+  { id: 'm4uhd', name: 'Breach', url: 'https://api.videasy.net/m4uhd', movieOnly: false },
 ];
 
 // Decrypt API endpoint
