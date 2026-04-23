@@ -1,3 +1,5 @@
+import { proxyFetch } from './proxy';
+
 // TMDB & Videasy API configuration
 export const TMDB_API_KEY = process.env.TMDB_API_KEY || '';
 export const TMDB_BASE = 'https://api.themoviedb.org/3';
@@ -69,12 +71,12 @@ async function fetchSingleServer(server: typeof VIDEASY_SERVERS[0], params: {
       url += `&episodeId=${params.episode}&seasonId=${params.season}`;
     }
 
-    const response = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(15000) });
+    const response = await proxyFetch(url, { headers: HEADERS, signal: AbortSignal.timeout(15000) });
     if (!response.ok) return null;
     const encryptedText = await response.text();
 
     // Decrypt
-    const decResponse = await fetch(DECRYPT_API, {
+    const decResponse = await proxyFetch(DECRYPT_API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: encryptedText, id: params.tmdbId }),
@@ -160,7 +162,7 @@ export async function fetchTMDB(endpoint: string, params: Record<string, string>
     ...params,
   });
   const url = `${TMDB_BASE}${endpoint}?${searchParams}`;
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const res = await proxyFetch(url, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error(`TMDB API error: ${res.status}`);
   return res.json();
 }
@@ -175,7 +177,7 @@ export async function searchTMDB(query: string, page = 1) {
     page: String(page),
   });
   const url = `${TMDB_BASE}/search/multi?${searchParams}`;
-  const res = await fetch(url, { next: { revalidate: 300 } });
+  const res = await proxyFetch(url, { next: { revalidate: 300 } });
   if (!res.ok) throw new Error(`TMDB search error: ${res.status}`);
   return res.json();
 }
