@@ -9,8 +9,8 @@ export async function GET(request: NextRequest) {
   const year = searchParams.get('year');
   const tmdbId = searchParams.get('tmdbId');
   const imdbId = searchParams.get('imdbId');
-  const season = searchParams.get('season');
-  const episode = searchParams.get('episode');
+const season = searchParams.get('season') || searchParams.get('seasonId');
+const episode = searchParams.get('episode') || searchParams.get('episodeId');
 
   if (!title || !mediaType || !year || !tmdbId) {
     return NextResponse.json(
